@@ -1,0 +1,745 @@
+/* ==========================================
+   TastyRecipe - Ultra Modern & Dynamic Hero Section
+   ========================================== */
+
+:root {
+  --hero-primary: #ff6b00;
+  --hero-primary-hover: #e65c00;
+  --hero-gradient: linear-gradient(135deg, #ff6b00 0%, #ff8c00 50%, #ff4d00 100%);
+  --hero-primary-light: rgba(255, 107, 0, 0.08);
+  --hero-primary-glow: rgba(255, 107, 0, 0.35);
+
+  --hero-bg: #fffbf7;
+  --hero-text-dark: #1a1a24;
+  --hero-text-muted: #5c5d69;
+  --hero-white: #ffffff;
+
+  --hero-shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.05);
+  --hero-shadow-md: 0 12px 35px rgba(0, 0, 0, 0.08);
+  --hero-shadow-lg: 0 20px 45px rgba(255, 107, 0, 0.2);
+
+  --hero-transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================
+   MAIN HERO SECTION
+   ========================================== */
+
+.hero {
+  position: relative;
+  width: 100%;
+  background: radial-gradient(circle at 15% 20%, rgba(255, 107, 0, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 85% 75%, rgba(255, 140, 0, 0.06) 0%, transparent 45%),
+    var(--hero-bg);
+  padding: 85px 0 95px 0;
+  overflow: hidden;
+}
+
+/* Background Glowing Orbs */
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb-1 {
+  width: 380px;
+  height: 380px;
+  background: rgba(255, 107, 0, 0.14);
+  top: -80px;
+  left: -80px;
+  animation: orbFloat1 8s ease-in-out infinite alternate;
+}
+
+.orb-2 {
+  width: 320px;
+  height: 320px;
+  background: rgba(255, 180, 50, 0.16);
+  bottom: -60px;
+  right: -60px;
+  animation: orbFloat2 10s ease-in-out infinite alternate;
+}
+
+/* Hero Container */
+.hero-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1350px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 50px;
+}
+
+/* ==========================================
+   LEFT CONTENT
+   ========================================== */
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  animation: heroFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Trending Badge */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 8px 18px;
+  border-radius: 40px;
+  border: 1px solid rgba(255, 107, 0, 0.18);
+  box-shadow: 0 4px 18px rgba(255, 107, 0, 0.1);
+  margin-bottom: 24px;
+  transition: var(--hero-transition);
+}
+
+.hero-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 107, 0, 0.18);
+  border-color: var(--hero-primary);
+}
+
+.badge-icon {
+  color: var(--hero-primary);
+  display: flex;
+  align-items: center;
+}
+
+.badge-text {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--hero-text-dark);
+  letter-spacing: 0.3px;
+}
+
+.badge-flame {
+  color: #ff4500;
+  display: flex;
+  align-items: center;
+  animation: flameBounce 1.5s ease infinite alternate;
+}
+
+/* Hero Title */
+.hero-title {
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1.12;
+  color: var(--hero-text-dark);
+  letter-spacing: -1.5px;
+  margin-bottom: 20px;
+}
+
+.hero-title-highlight {
+  display: block;
+  background: var(--hero-gradient);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 12px rgba(255, 107, 0, 0.22));
+}
+
+/* Hero Description */
+.hero-desc {
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--hero-text-muted);
+  max-width: 540px;
+  margin-bottom: 35px;
+}
+
+/* ==========================================
+   SEARCH BAR
+   ========================================== */
+
+.hero-search-box {
+  width: 100%;
+  max-width: 540px;
+  display: flex;
+  align-items: center;
+  background: var(--hero-white);
+  border-radius: 50px;
+  padding: 7px 8px 7px 20px;
+  border: 2px solid rgba(255, 107, 0, 0.12);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06), 0 0 20px rgba(255, 107, 0, 0.05);
+  transition: var(--hero-transition);
+}
+
+.hero-search-box:focus-within,
+.hero-search-box:hover {
+  border-color: var(--hero-primary);
+  box-shadow: 0 16px 40px rgba(255, 107, 0, 0.18), 0 0 25px rgba(255, 107, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.search-input-icon {
+  color: var(--hero-primary);
+  flex-shrink: 0;
+}
+
+.hero-search-box input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 15.5px;
+  font-weight: 500;
+  color: var(--hero-text-dark);
+  background: transparent;
+  padding: 10px 0;
+}
+
+.hero-search-box input::placeholder {
+  color: #9a9ab0;
+}
+
+.hero-search-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--hero-gradient);
+  color: var(--hero-white);
+  border: none;
+  padding: 14px 28px;
+  border-radius: 40px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 20px var(--hero-primary-glow);
+  transition: var(--hero-transition);
+  flex-shrink: 0;
+}
+
+.hero-search-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 10px 28px rgba(255, 107, 0, 0.5);
+}
+
+.hero-search-btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+.btn-arrow {
+  transition: transform 0.3s ease;
+}
+
+/* ==========================================
+   POPULAR TAGS
+   ========================================== */
+
+.hero-popular {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 26px;
+  flex-wrap: wrap;
+}
+
+.popular-title {
+  font-size: 14px;
+  color: var(--hero-text-muted);
+  font-weight: 700;
+}
+
+.popular-tags-list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--hero-white);
+  border: 1px solid rgba(255, 107, 0, 0.12);
+  padding: 7px 16px;
+  border-radius: 30px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--hero-text-dark);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: var(--hero-transition);
+}
+
+.tag-pill:hover {
+  background: var(--hero-primary);
+  color: var(--hero-white);
+  border-color: var(--hero-primary);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(255, 107, 0, 0.3);
+}
+
+.tag-emoji {
+  font-size: 14px;
+}
+
+/* ==========================================
+   QUICK STATS ROW
+   ========================================== */
+
+.hero-stats {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 42px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 107, 0, 0.12);
+  width: 100%;
+  max-width: 540px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stat-icon-wrapper {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--hero-primary-light);
+  color: var(--hero-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-item h4 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--hero-text-dark);
+  margin-bottom: 2px;
+  line-height: 1.1;
+}
+
+.stat-item p {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--hero-text-muted);
+  margin: 0;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* ==========================================
+   RIGHT HERO VISUAL & FLOATING BADGES
+   ========================================== */
+
+.hero-right {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: heroFadeInRight 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  border-radius: 36px;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.14), 0 0 35px rgba(255, 107, 0, 0.12);
+  border: 4px solid #ffffff;
+}
+
+.hero-main-img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-image-wrapper:hover .hero-main-img {
+  transform: scale(1.06);
+}
+
+.image-overlay-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 0.35) 100%);
+  pointer-events: none;
+}
+
+/* ==========================================
+   FLOATING BADGES
+   ========================================== */
+
+.floating-card {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 14px 20px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(255, 107, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transition: var(--hero-transition);
+  z-index: 2;
+}
+
+.floating-card:hover {
+  transform: scale(1.06) translateY(-4px);
+  box-shadow: 0 22px 48px rgba(255, 107, 0, 0.25);
+}
+
+.floating-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Badge 1: Top Right (Recipe Count) */
+.badge-recipes {
+  top: 30px;
+  right: -25px;
+  animation: floatCard1 4s ease-in-out infinite;
+  background: var(--hero-gradient);
+  color: var(--hero-white);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 16px 40px rgba(255, 107, 0, 0.4);
+}
+
+.badge-recipes .chef-box {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--hero-white);
+}
+
+.badge-recipes h3 {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--hero-white);
+}
+
+.badge-recipes p {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 4px;
+}
+
+/* Badge 2: Bottom Left (Rating & Reviews) */
+.badge-rating {
+  bottom: 25px;
+  left: -25px;
+  animation: floatCard2 4.5s ease-in-out infinite;
+}
+
+.star-box {
+  background: #fff4e5;
+  color: #ff9800;
+}
+
+.fill-star {
+  fill: #ff9800;
+}
+
+.rating-stars {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rating-stars strong {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--hero-text-dark);
+}
+
+.star-symbols {
+  color: #ff9800;
+  letter-spacing: 1px;
+  font-size: 13px;
+}
+
+.badge-rating p {
+  font-size: 12px;
+  color: var(--hero-text-muted);
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Badge 3: Bottom Right (Quick Prep Time) */
+.badge-time {
+  bottom: 110px;
+  right: -20px;
+  animation: floatCard3 5s ease-in-out infinite;
+  display: none;
+}
+
+.clock-box {
+  background: rgba(255, 107, 0, 0.1);
+  color: var(--hero-primary);
+}
+
+.badge-time strong {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--hero-text-dark);
+  display: block;
+}
+
+.badge-time p {
+  font-size: 11.5px;
+  color: var(--hero-text-muted);
+  font-weight: 600;
+  margin: 0;
+}
+
+/* ==========================================
+   ANIMATIONS & KEYFRAMES
+   ========================================== */
+
+@keyframes heroFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroFadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes floatCard1 {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes floatCard2 {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+@keyframes floatCard3 {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes flameBounce {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    transform: scale(1.2) translateY(-2px);
+  }
+}
+
+@keyframes orbFloat1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(40px, 30px) scale(1.1);
+  }
+}
+
+@keyframes orbFloat2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(-30px, -40px) scale(1.15);
+  }
+}
+
+/* ==========================================
+   TABLET RESPONSIVE
+   ========================================== */
+
+@media (max-width: 1100px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 50px;
+  }
+
+  .hero-left {
+    align-items: center;
+  }
+
+  .hero-title {
+    font-size: 52px;
+  }
+
+  .hero-desc {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-search-box {
+    margin: 0 auto;
+  }
+
+  .hero-popular {
+    justify-content: center;
+  }
+
+  .hero-stats {
+    margin: 35px auto 0 auto;
+    justify-content: center;
+  }
+
+  .badge-recipes {
+    right: 5%;
+    top: 15px;
+  }
+
+  .badge-rating {
+    left: 5%;
+    bottom: 15px;
+  }
+}
+
+/* ==========================================
+   MOBILE RESPONSIVE
+   ========================================== */
+
+@media (max-width: 650px) {
+  .hero {
+    padding: 50px 0 65px 0;
+  }
+
+  .hero-container {
+    padding: 0 20px;
+    gap: 40px;
+  }
+
+  .hero-title {
+    font-size: 38px;
+    letter-spacing: -1px;
+  }
+
+  .hero-desc {
+    font-size: 15.5px;
+    line-height: 1.55;
+  }
+
+  .hero-search-box {
+    flex-direction: column;
+    padding: 12px;
+    border-radius: 24px;
+    gap: 10px;
+  }
+
+  .search-input-wrapper {
+    width: 100%;
+    padding: 4px 8px;
+  }
+
+  .hero-search-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 13px 0;
+    border-radius: 30px;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+    gap: 16px;
+    border-top: none;
+    padding-top: 10px;
+  }
+
+  .stat-divider {
+    display: none;
+  }
+
+  .hero-image-wrapper {
+    max-width: 100%;
+    border-radius: 26px;
+  }
+
+  .hero-main-img {
+    height: 340px;
+  }
+
+  .floating-card {
+    padding: 10px 14px;
+    border-radius: 16px;
+  }
+
+  .floating-icon-box {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+
+  .badge-recipes {
+    right: 8px;
+    top: -10px;
+  }
+
+  .badge-recipes h3 {
+    font-size: 20px;
+  }
+
+  .badge-rating {
+    left: 8px;
+    bottom: -10px;
+  }
+
+  .rating-stars strong {
+    font-size: 13px;
+  }
+
+  .star-symbols {
+    font-size: 11px;
+  }
+}

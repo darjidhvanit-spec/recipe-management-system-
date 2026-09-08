@@ -1,0 +1,244 @@
+/* ==========================================
+   Google Font Import & CSS Custom Variables
+   ========================================== */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+:root {
+  --primary-orange: #ff6b00;
+  --primary-gradient: linear-gradient(135deg, #ff6b00 0%, #ff8c00 100%);
+  --icon-bg-gradient: linear-gradient(135deg, #fff0e6 0%, #ffe5d4 100%);
+  --text-dark: #121826;
+  --text-muted: #64748b;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --border-light: rgba(255, 107, 0, 0.08);
+  --shadow-base: 0 20px 50px -10px rgba(0, 0, 0, 0.07), 0 0 20px rgba(255, 107, 0, 0.03);
+  --shadow-hover: 0 25px 50px -10px rgba(255, 107, 0, 0.25), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
+  --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ==========================================
+   Floating Glassmorphism Container
+   ========================================== */
+.features {
+  max-width: 1240px;
+  margin: -60px auto 60px;
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 32px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 28px 20px;
+  box-shadow: var(--shadow-base);
+  position: relative;
+  z-index: 10;
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  animation: slideUpFade 0.8s ease-out forwards;
+}
+
+/* Container Background Glowing Spot Elements */
+.features::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -20%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 107, 0, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ==========================================
+   Feature Card Micro-Interactions
+   ========================================== */
+.feature-card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 24px;
+  border-right: 1px dashed rgba(229, 231, 235, 0.8);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.feature-card:last-child {
+  border-right: none;
+}
+
+/* Hover Lift Effect & Soft Background Highlight */
+.feature-card:hover {
+  background: #ffffff;
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-hover);
+  border-right-color: transparent;
+}
+
+/* ==========================================
+   Animated Gradient Icon Badge
+   ========================================== */
+.feature-icon {
+  font-size: 32px;
+  width: 68px;
+  height: 68px;
+  min-width: 68px;
+  background: var(--icon-bg-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 22px;
+  color: var(--primary-orange);
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.9), 0 8px 18px rgba(255, 107, 0, 0.12);
+  transition: var(--transition);
+  position: relative;
+}
+
+/* Icon Pulse & Rotation Effect on Hover */
+.feature-card:hover .feature-icon {
+  background: var(--primary-gradient);
+  color: #ffffff;
+  transform: rotate(-10deg) scale(1.1);
+  box-shadow: 0 12px 25px rgba(255, 107, 0, 0.4);
+}
+
+/* Icon Inner Pulse Ring Animation */
+.feature-icon::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 26px;
+  border: 2px solid var(--primary-orange);
+  opacity: 0;
+  scale: 0.8;
+  transition: var(--transition);
+}
+
+.feature-card:hover .feature-icon::after {
+  opacity: 0.25;
+  scale: 1;
+}
+
+/* ==========================================
+   Typography & Content
+   ========================================== */
+.feature-content h3 {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+  letter-spacing: -0.3px;
+  transition: color 0.3s ease;
+}
+
+.feature-card:hover .feature-content h3 {
+  color: var(--primary-orange);
+}
+
+.feature-content p {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.55;
+  font-weight: 500;
+}
+
+/* ==========================================
+   Keyframe Animations
+   ========================================== */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================
+   Responsive Mobile & Tablet Design
+   ========================================== */
+
+/* Laptop / Small Desktop */
+@media (max-width: 1200px) {
+  .features {
+    max-width: 95%;
+    padding: 20px 10px;
+  }
+  
+  .feature-card {
+    gap: 14px;
+    padding: 12px 16px;
+  }
+  
+  .feature-icon {
+    width: 58px;
+    height: 58px;
+    min-width: 58px;
+    font-size: 26px;
+  }
+}
+
+/* Tablet (2x2 Grid) */
+@media (max-width: 992px) {
+  .features {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+    padding: 30px;
+  }
+
+  .feature-card {
+    border-right: none;
+    border-bottom: 1px dashed rgba(229, 231, 235, 0.8);
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .feature-card:nth-child(3),
+  .feature-card:nth-child(4) {
+    border-bottom: none;
+  }
+}
+
+/* Mobile Screen (Vertical Stack) */
+@media (max-width: 600px) {
+  .features {
+    grid-template-columns: 1fr;
+    margin: 20px 16px 40px;
+    padding: 20px 16px;
+    border-radius: 24px;
+  }
+
+  .feature-card {
+    border-right: none;
+    border-bottom: 1px dashed rgba(229, 231, 235, 0.8);
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .feature-card:last-child {
+    border-bottom: none;
+  }
+
+  .feature-icon {
+    width: 54px;
+    height: 54px;
+    min-width: 54px;
+    font-size: 24px;
+    border-radius: 18px;
+  }
+
+  .feature-content h3 {
+    font-size: 16px;
+  }
+
+  .feature-content p {
+    font-size: 13px;
+  }
+}
