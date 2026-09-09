@@ -9,6 +9,7 @@ import {
   LogIn,
   LogOut,
   ChefHat,
+  User,
 } from "lucide-react";
 import "./Navbar.css";
 
@@ -26,8 +27,59 @@ const Navbar = () => {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
 
-  const isLoggedIn = localStorage.getItem("recipeUser");
+  // Helper to extract clean user display name
+  const getUserDisplayName = (user) => {
+    if (!user) return "";
+    if (typeof user === "string") {
+      if (user.includes("@")) {
+        const namePart = user.split("@")[0];
+        return namePart.charAt(0).toUpperCase() + namePart.slice(1);
+      }
+      return user;
+    }
+    if (user.name) return user.name;
+    if (user.email) {
+      const namePart = user.email.split("@")[0];
+      return namePart.charAt(0).toUpperCase() + namePart.slice(1);
+    }
+    return "Chef";
+  };
+
+  // Check and sync user state
+  const syncUser = () => {
+    try {
+      const stored = localStorage.getItem("recipeUser");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        setCurrentUser(parsed);
+      } else {
+        setCurrentUser(null);
+      }
+    } catch {
+      const stored = localStorage.getItem("recipeUser");
+      if (stored) {
+        setCurrentUser({ name: stored });
+      } else {
+        setCurrentUser(null);
+      }
+    }
+  };
+
+  // Listen for storage changes, route changes & custom authChange events
+  useEffect(() => {
+    syncUser();
+
+    const handleStorage = () => syncUser();
+    window.addEventListener("storage", handleStorage);
+    window.addEventListener("authChange", handleStorage);
+
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+      window.removeEventListener("authChange", handleStorage);
+    };
+  }, [location.pathname]);
 
   // SCROLL EFFECT
   useEffect(() => {
@@ -36,7 +88,6 @@ const Navbar = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -50,9 +101,14 @@ const Navbar = () => {
   // LOGOUT
   const handleLogout = () => {
     localStorage.removeItem("recipeUser");
+    setCurrentUser(null);
+    window.dispatchEvent(new Event("authChange"));
     setMenuOpen(false);
     navigate("/login");
   };
+
+  const displayName = getUserDisplayName(currentUser);
+  const userInitial = displayName ? displayName.charAt(0).toUpperCase() : "U";
 
   return (
     <header className={`navbar ${scrolled ? "scrolled" : ""}`}>
@@ -94,17 +150,29 @@ const Navbar = () => {
             );
           })}
 
-          {/* MOBILE LOGIN / LOGOUT */}
+          {/* MOBILE USER / LOGIN / LOGOUT ACTIONS */}
           <div className="mobile-actions">
-            {isLoggedIn ? (
-              <button
-                type="button"
-                className="login-btn mobile-btn"
-                onClick={handleLogout}
-              >
-                <LogOut size={17} className="btn-icon" />
-                <span>Logout</span>
-              </button>
+            {currentUser ? (
+              <div className="mobile-user-box">
+                <div className="mobile-user-info">
+                  <div className="user-avatar-circle">
+                    {userInitial}
+                  </div>
+                  <div className="user-text-info">
+                    <span className="user-greeting-label">Welcome back,</span>
+                    <span className="user-display-name">{displayName}</span>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  className="logout-nav-btn mobile-btn"
+                  onClick={handleLogout}
+                >
+                  <LogOut size={16} className="btn-icon" />
+                  <span>Logout</span>
+                </button>
+              </div>
             ) : (
               <button
                 type="button"
@@ -121,17 +189,30 @@ const Navbar = () => {
           </div>
         </nav>
 
-        {/* DESKTOP LOGIN / LOGOUT */}
+        {/* DESKTOP USER PROFILE & ACTIONS */}
         <div className="navbar-actions">
-          {isLoggedIn ? (
-            <button
-              type="button"
-              className="login-btn"
-              onClick={handleLogout}
-            >
-              <LogOut size={17} className="btn-icon" />
-              <span>Logout</span>
-            </button>
+          {currentUser ? (
+            <div className="user-profile-wrapper">
+              <div className="user-avatar-badge" title={`Logged in as ${displayName}`}>
+                <div className="user-avatar-circle">
+                  {userInitial}
+                </div>
+                <div className="user-text-info">
+                  <span className="user-greeting-label">Welcome,</span>
+                  <span className="user-display-name">{displayName}</span>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                className="logout-nav-btn"
+                onClick={handleLogout}
+                title="Logout from TastyRecipe"
+              >
+                <LogOut size={16} className="btn-icon" />
+                <span>Logout</span>
+              </button>
+            </div>
           ) : (
             <button
               type="button"

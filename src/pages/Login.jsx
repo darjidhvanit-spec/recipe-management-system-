@@ -60,13 +60,20 @@ const Login = () => {
 
 
     setTimeout(() => {
+      const extractedName = email.trim().split("@")[0];
+      const formattedName =
+        extractedName.charAt(0).toUpperCase() + extractedName.slice(1);
 
       localStorage.setItem(
         "recipeUser",
         JSON.stringify({
+          name: formattedName,
           email: email.trim(),
         })
       );
+
+      // Dispatch custom event so Navbar updates instantly
+      window.dispatchEvent(new Event("authChange"));
 
       setLoading(false);
 

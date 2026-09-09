@@ -232,11 +232,109 @@
 
 /* ==========================================
    LOGIN / LOGOUT BUTTON
+/* ==========================================
+   USER PROFILE & LOGIN / LOGOUT BUTTON
    ========================================== */
 
 .navbar-actions {
   display: flex;
   align-items: center;
+  gap: 12px;
+}
+
+/* User Profile Wrapper */
+.user-profile-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 107, 0, 0.06);
+  border: 1.5px solid rgba(255, 107, 0, 0.18);
+  padding: 5px 14px 5px 6px;
+  border-radius: 30px;
+  transition: var(--nav-transition);
+  cursor: default;
+}
+
+.user-avatar-badge:hover {
+  background: rgba(255, 107, 0, 0.1);
+  border-color: rgba(255, 107, 0, 0.35);
+  transform: translateY(-1px);
+}
+
+.user-avatar-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--nav-primary-gradient);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px var(--nav-primary-glow);
+}
+
+.user-text-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.user-greeting-label {
+  font-size: 10.5px;
+  color: var(--nav-text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.user-display-name {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--nav-text-dark);
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Logout Button */
+.logout-nav-btn {
+  border: 1.5px solid #ffded0;
+  background: #fff6f0;
+  color: #d93800;
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-size: 13.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: var(--nav-transition);
+}
+
+.logout-nav-btn:hover {
+  background: #ff521a;
+  border-color: #ff521a;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(255, 82, 26, 0.35);
+}
+
+.logout-nav-btn:hover .btn-icon {
+  transform: translateX(2px);
+}
+
+.logout-nav-btn:active {
+  transform: translateY(0);
 }
 
 .login-btn {
@@ -303,6 +401,22 @@
 /* Mobile Actions */
 .mobile-actions {
   display: none;
+}
+
+.mobile-user-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.mobile-user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: rgba(255, 107, 0, 0.08);
+  border-radius: 14px;
 }
 
 /* ==========================================
