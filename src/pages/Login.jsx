@@ -143,7 +143,8 @@ const Login = () => {
 
         <button
           className="back-home-btn"
-          onClick={() => navigate("/login")}
+          onClick={() => navigate("/")}
+          title="Back to Home"
         >
           <FaArrowLeft />
         </button>
@@ -320,7 +321,7 @@ const Login = () => {
 
           <p className="login-footer-text">
             New to TastyRecipe?
-            <span>
+            <span onClick={() => navigate("/register")}>
               Create Account
             </span>
           </p>

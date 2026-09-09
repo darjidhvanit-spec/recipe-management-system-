@@ -9,6 +9,7 @@ import CategorySection from "./components/CategorySection";
 import Footer from "./components/Footer";
 
 import Login from "./pages/Login";
+import Registration from "./pages/Registration";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Categories from "./pages/Categories";
@@ -51,6 +52,10 @@ function App() {
 
           {/* Login */}
           <Route path="/login" element={<Login />} />
+
+          {/* Registration */}
+          <Route path="/register" element={<Registration />} />
+          <Route path="/registration" element={<Registration />} />
 
           {/* Contact Us */}
           <Route path="/contact" element={<Contact />} />
